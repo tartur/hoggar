@@ -3,7 +3,6 @@ package org.ocaml.ide.highlighter
 import com.intellij.lang.annotation.AnnotationHolder
 import com.intellij.lang.annotation.ExternalAnnotator
 import com.intellij.lang.annotation.HighlightSeverity
-import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.util.TextRange
 import com.intellij.psi.PsiFile
 import org.jetbrains.annotations.NotNull
@@ -38,7 +37,7 @@ class MerlinErrorHighlightingAnnotator(var component: MerlinServiceComponent) : 
 
     override fun apply(file: PsiFile, results: Results, holder: AnnotationHolder) {
         val ln = results.lineNumbering
-        val (t, f) = results.errors.partition { it.start == null || it.end == null }
+        val (_, f) = results.errors.partition { it.start == null || it.end == null }
         for(error in f){
             val range = TextRange(ln.index(error.start!!), ln.index(error.end!!))
             val severity = merlinErrors[error.type]!!

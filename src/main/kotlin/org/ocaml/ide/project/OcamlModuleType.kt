@@ -16,7 +16,7 @@ class OcamlModuleType : ModuleType<OcamlModuleBuilder>(ID) {
             return ModuleTypeManager.getInstance().findByID(ID) as OcamlModuleType
         }
     }
-    override fun getBigIcon(): Icon? {
+    override fun getIcon(): Icon? {
         return OcamlIcons.CAMEL_ICON_FILE
     }
 
