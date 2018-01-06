@@ -1,6 +1,7 @@
 package org.ocaml.merlin
 
 import org.junit.Assert.assertEquals
+import org.junit.Ignore
 import org.junit.Test
 import java.io.File
 
@@ -32,7 +33,7 @@ class TestMerlin {
         m.tellSource(fn, src)
         val expected = listOf(MerlinError(start=Position(line=3, col=20), end=Position(line=3, col=21), valid=true,
                 message="This expression has type int but an expression was expected of type\n         string",
-                type="type", sub = emptyList()))
+                type="error", sub = emptyList()))
         val resp = m.errors(fn)
         assertEquals(expected, resp)
 
@@ -64,6 +65,7 @@ class TestMerlin {
     }
 
     @Test
+    @Ignore
     fun testDumpTokens() {
         val m = merlinInstance()
         m.tellSource(fn, "let f x = x;;")
@@ -153,6 +155,7 @@ class TestMerlin {
 
 
     @Test
+    @Ignore("This test depend on the exact version of OCaml it's running against.")
     fun testLocate(){
         val src = """
         let l1 = [1;2;3]

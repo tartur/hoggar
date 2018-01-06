@@ -19,7 +19,9 @@ class MerlinErrorHighlightingAnnotator(var component: MerlinServiceComponent) : 
         val merlinErrors = mapOf(
                 Pair("type", HighlightSeverity.ERROR),
                 Pair("parser", HighlightSeverity.ERROR),
+                Pair("lexer",  HighlightSeverity.ERROR),
                 Pair("env",  HighlightSeverity.ERROR),
+                Pair("error",  HighlightSeverity.ERROR),
                 Pair("warning", HighlightSeverity.WARNING),
                 Pair("unkown", HighlightSeverity.INFORMATION))
     }

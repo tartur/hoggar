@@ -1,5 +1,7 @@
 package org.ocaml.merlin
 
+import com.fasterxml.jackson.annotation.JsonFormat
+import com.fasterxml.jackson.annotation.JsonPropertyOrder
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
@@ -59,14 +61,14 @@ class Merlin(private val objectMapper: ObjectMapper, private val merlinProcess: 
     fun locate(filename: String, position: Position): LocateResponse {
         val request = """["locate", null, "ml", "at", ${objectMapper.writeValueAsString(position)}]"""
         val node = makeRequest(filename, request, object : TypeReference<JsonNode>() {})
-        if(node.isTextual) {
-            if(node.textValue() == "Already at definition point") {
+        if (node.isTextual) {
+            if (node.textValue() == "Already at definition point") {
                 return LocatedAtPosition
             } else {
                 return LocateFailed(node.textValue())
             }
         } else {
-            if(node.get("file") == null) {
+            if (node.get("file") == null) {
                 return objectMapper.treeToValue(node, LocatedInCurrentFile::class.java)
             } else {
                 return objectMapper.treeToValue(node, Located::class.java)
@@ -133,12 +135,15 @@ data class Completions(val entries: List<CompletionEntry>, val context: Completi
 
 data class CompletionEntry(val name: String, val kind: String, val desc: String, val info: String)
 
-
-object CompletionContext
+@JsonFormat(shape = JsonFormat.Shape.ARRAY)
+@JsonPropertyOrder("contextType", "applicationContext")
+data class CompletionContext(val contextType: String, val applicationContext: ApplicationContext)
+data class ApplicationContext(val argument_type: String, val labels: List<ApplicationLabels>)
+data class ApplicationLabels(val name: String, val type: String)
 
 interface LocateResponse
 
 object LocatedAtPosition : LocateResponse
 data class LocateFailed(val msg: String) : LocateResponse
 data class LocatedInCurrentFile(val pos: Position) : LocateResponse
-data class Located(val file: String, val pos: Position): LocateResponse
+data class Located(val file: String, val pos: Position) : LocateResponse

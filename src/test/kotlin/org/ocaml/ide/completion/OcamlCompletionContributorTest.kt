@@ -14,7 +14,7 @@ class OcamlCompletionContributorTest : LightPlatformCodeInsightFixtureTestCase()
             let some_other_val = 2
         end
         let a = TestModule.some_<caret>"""
-        val expected =  arrayOf("TestModule.some_other_val", "TestModule.some_val")
+        val expected =  arrayOf("some_other_val", "some_val")
         myFixture.configureByText("test.ml", script)
         val res = this.myFixture.complete(CompletionType.BASIC).map { it.lookupString }.toTypedArray()
         UsefulTestCase.assertOrderedEquals(expected, *res)

@@ -5,7 +5,7 @@ class OpamCommand {
         val userHome = System.getProperty("user.home")
         val cmd = """
             . $userHome/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
-            ${ parameters.joinToString(" ") }
+            cd ~/Code/ocaml-test; ${ parameters.joinToString(" ") }
             """
         return cmd
     }
