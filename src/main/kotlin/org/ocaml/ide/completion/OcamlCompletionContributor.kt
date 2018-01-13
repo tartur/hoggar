@@ -27,11 +27,10 @@ class OcamlCompletionContributor : CompletionContributor() {
                                                 context: ProcessingContext,
                                                 resultSet: CompletionResultSet) {
 
-                        resultSet.stopHere()
                         val ln = LineNumbering(parameters.originalFile.text)
                         val searchPrefix = findSuitablePrefix(parameters)
                         val matchPrefix = matchingPrefix(searchPrefix)
-                        val rs = resultSet.withPrefixMatcher(matchPrefix)
+                        val rs = resultSet.withPrefixMatcher(PlainPrefixMatcher(matchPrefix))
                         merlinService.completions(parameters.originalFile, searchPrefix, ln.position(parameters.offset))
                                 .map {
                                     LookupElementBuilder.create(it.name)
@@ -44,28 +43,29 @@ class OcamlCompletionContributor : CompletionContributor() {
 
 
     private fun findSuitablePrefix(parameters: CompletionParameters): String {
-        val end = getOriginalPosition(parameters)
-        return findEmacsOCamlAtom(parameters.originalFile.text, end)
+        val file = parameters.originalFile
+        val text = file.text
+        val offset = Math.min(text.length, parameters.offset)
+        return findEmacsOCamlAtom(text, offset - 1)
     }
 
     private fun matchingPrefix(searchPrefix: String): String {
         return if (searchPrefix.contains(".")) {
-            searchPrefix.substring(searchPrefix.lastIndexOf(".") + 1)
+            searchPrefix.substring(searchPrefix.lastIndexOfAny(listOf(".")) + 1)
         } else {
             searchPrefix
         }
     }
 
-    private fun getOriginalPosition(parameters: CompletionParameters): Int {
-        return if (parameters.originalPosition == null) {
-            parameters.originalFile.textLength - 1
-        } else {
-            parameters.originalPosition!!.textOffset
-        }
-    }
-
     private fun findEmacsOCamlAtom(text: String, offset: Int): String {
-        val endIndex = re.find(ReversedSubstringCharSequence(text, offset, 0))?.next()?.range?.last
+        val firstResult = re.find(ReversedSubstringCharSequence(text, offset, 0))
+        val resultToUse = if (text.length - 1 == offset) {
+            firstResult
+        } else {
+            firstResult?.next()
+        }
+
+        val endIndex = resultToUse?.range?.last
 
         return if (endIndex != null) {
             text.substring(offset - endIndex, offset + 1)

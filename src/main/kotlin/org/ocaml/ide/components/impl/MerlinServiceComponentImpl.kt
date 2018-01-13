@@ -56,10 +56,9 @@ class MerlinServiceComponentImpl : MerlinServiceComponent {
     }
 
     private fun getDotMerlin(file: PsiFile): File? {
-        val files = FilenameIndex.getFilesByName(file.project, ".merlin", GlobalSearchScope.allScope(file.project))
-        val currentDirFiles = files.filter { f -> f.containingDirectory == file.containingDirectory }
-        return if (currentDirFiles.size == 1) {
-            File(files[0].virtualFile.canonicalPath)
+        val dotMerlin = File(file.containingDirectory.virtualFile.canonicalPath, ".merlin")
+        return if (dotMerlin.exists()) {
+            dotMerlin
         } else {
             null
         }

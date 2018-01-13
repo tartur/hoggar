@@ -3,17 +3,11 @@ package org.ocaml.merlin
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.KotlinModule
-import com.intellij.notification.Notification
-import com.intellij.notification.NotificationType
-import com.intellij.notification.Notifications
-import com.intellij.openapi.actionSystem.EmptyAction
-import com.intellij.ui.CloseNotificationAction
 import java.io.BufferedReader
 import java.io.File
 import java.io.InputStreamReader
 import java.io.OutputStreamWriter
 import java.util.*
-import java.util.concurrent.TimeUnit
 
 class Merlin3(private val objectMapper: ObjectMapper) {
     companion object {
