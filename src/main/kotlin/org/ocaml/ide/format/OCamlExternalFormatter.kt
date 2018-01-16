@@ -6,14 +6,13 @@ import org.ocaml.merlin.OpamCommand
 import java.nio.charset.Charset
 import java.nio.file.Files
 
-abstract class OCamlExternalFormatter (val cmd: String){
-    private val opamCommand = OpamCommand()
+abstract class OCamlExternalFormatter(val cmd: OpamCommand) {
 
     fun runExternalFormatter(inputText: String): String {
         val tempPath = Files.createTempFile("ijfmt", ".ml")
         Files.write(tempPath, inputText.toByteArray(Charset.forName("UTF-8")))
         val absolutePath = tempPath.toAbsolutePath().toFile().absolutePath
-        val ocamlformatProcess = opamCommand.processBuilder(cmd, "--inplace", absolutePath).start()
+        val ocamlformatProcess = cmd.start("--inplace", absolutePath)
         ocamlformatProcess.waitFor()
         val formattedText = Files.readAllLines(tempPath).joinToString(separator = "\n")
         tempPath.delete()

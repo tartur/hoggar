@@ -1,6 +1,8 @@
 package org.ocaml.ide.format
 
-class OcpIndent : OCamlExternalFormatter("ocp-indent") {
+import org.ocaml.merlin.OpamCommand
+
+class OcpIndent : OCamlExternalFormatter(OpamCommand("ocp-indent")) {
     companion object {
         val instance = OcpIndent()
     }

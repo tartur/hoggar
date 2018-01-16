@@ -1,6 +1,8 @@
 package org.ocaml.ide.format
 
-class OCamlFormat : OCamlExternalFormatter("ocamlformat") {
+import org.ocaml.merlin.OpamCommand
+
+class OCamlFormat : OCamlExternalFormatter(OpamCommand("ocamlformat")) {
     companion object {
         val instance = OCamlFormat()
     }

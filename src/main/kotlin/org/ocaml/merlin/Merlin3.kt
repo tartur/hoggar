@@ -18,10 +18,6 @@ class Merlin3(private val objectMapper: ObjectMapper) {
         }
     }
 
-
-    private val merlinBin = "/home/beajeanm/.opam/4.05.0/bin/ocamlmerlin"
-    private val opamCommand = OpamCommand()
-
     fun document(text: String, position: Position): Doc {
         val output = runCommand("document", text, null, listOf("-position", "${position.line}:${position.col}"))
         val response = extractResponse(objectMapper.readTree(output))
@@ -40,7 +36,6 @@ class Merlin3(private val objectMapper: ObjectMapper) {
 
     private fun runCommand(cmd: String, text: String?, dotMerlin: File?, command: List<String>): String? {
         val args = ArrayList<String>()
-        args.add(merlinBin)
         args.add("single")
         args.add(cmd)
         if (dotMerlin != null) {
@@ -49,10 +44,7 @@ class Merlin3(private val objectMapper: ObjectMapper) {
         }
         args.addAll(command)
 
-        val processBuilder = opamCommand.processBuilder(*(args.toTypedArray()))
-        processBuilder.redirectErrorStream(true)
-        val merlinProcess = processBuilder.start()
-
+        val merlinProcess = OpamCommand.OCamlMerlin.start(*(args.toTypedArray()))
         val writer = OutputStreamWriter(merlinProcess.outputStream)
         val reader = BufferedReader(InputStreamReader(merlinProcess.inputStream))
 

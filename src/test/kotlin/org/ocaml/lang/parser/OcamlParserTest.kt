@@ -17,8 +17,6 @@ class OcamlParserTest : ParsingTestCase("org/ocaml/lang/parser", "ml", OcamlPars
         }
         doTest(true)
         OcamlC.assertParses(getTestFile())
-
-
     }
 
     override fun getTestDataPath(): String {
