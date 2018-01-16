@@ -62,7 +62,7 @@ dependencies {
 
 //Copied from the rust plugin
 
-def jflexArgs(srcFlex, targetDir) {
+static def jflexArgs(srcFlex, targetDir) {
     return [    "--skel",   "parser/OcamlLexer.skeleton",
                 "-d",       targetDir,
                 srcFlex
@@ -98,3 +98,5 @@ task generateOcamlPsiAndParser(type: JavaExec) {
 
     classpath configurations.gen
 }
+compileKotlin.dependsOn generateOcamlPsiAndParser
+generateOcamlPsiAndParser.dependsOn generateOcamlLexer
