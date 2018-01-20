@@ -6,8 +6,6 @@ buildscript {
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
     }
-
-
 }
 
 plugins {
@@ -27,13 +25,13 @@ compileJava {
 intellij {
     version ideaVersion
     plugins 'coverage'
-    pluginName 'ocaml-idea'
+    pluginName 'hoggar'
     intellij.updateSinceUntilBuild false
 }
 
-
-group 'kuruvila'
+group 'hoggar'
 version '0.0.1-SNAPSHOT'
+
 
 sourceSets {
     main.java.srcDirs += "gen"
