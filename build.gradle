@@ -69,7 +69,7 @@ static def jflexArgs(srcFlex, targetDir) {
 
 task generateOcamlLexer(type: JavaExec) {
     ext.src = "parser/OcamlLexer.flex"
-    ext.dst = "gen/org/ocaml/lang/lexer/"
+    ext.dst = "gen/org/hoggar/lang/lexer/"
 
     main = "jflex.Main"
 
@@ -92,7 +92,7 @@ task generateOcamlPsiAndParser(type: JavaExec) {
     args = [ dstRoot, file(src) ]
 
     inputs  .file   file(src)
-    outputs .dir    fileTree(dir: dstRoot + '/org/ocaml/lang/parser/', include: '**/*.java')
+    outputs .dir    fileTree(dir: dstRoot + '/org/hoggar/lang/parser/', include: '**/*.java')
 
     classpath configurations.gen
 }

@@ -1,10 +1,10 @@
-package org.ocaml.lang.lexer;
+package org.hoggar.lang.lexer;
 
 import com.intellij.lexer.FlexLexer;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.TokenType;
 
-import static org.ocaml.lang.lexer.OcamlTypes.*;
+import static org.hoggar.lang.lexer.OcamlTypes.*;
 import static com.intellij.psi.TokenType.*;
 %%
 

@@ -1,5 +1,5 @@
 <idea-plugin version="2">
-    <id>org.ocaml.ide</id>
+    <id>org.hoggar.ide</id>
     <name>Ocaml</name>
     <version>1.0</version>
 
@@ -25,14 +25,14 @@
 
     <application-components>
         <component>
-            <interface-class>org.ocaml.ide.components.MerlinServiceComponent</interface-class>
-            <implementation-class>org.ocaml.ide.components.impl.MerlinServiceComponentImpl</implementation-class>
+            <interface-class>org.hoggar.ide.components.MerlinServiceComponent</interface-class>
+            <implementation-class>org.hoggar.ide.components.impl.MerlinServiceComponentImpl</implementation-class>
         </component>
         <component>
-            <implementation-class>org.ocaml.ide.format.OCamlDocumentManager</implementation-class>
+            <implementation-class>org.hoggar.ide.format.OCamlDocumentManager</implementation-class>
         </component>
         <component>
-            <implementation-class>org.ocaml.ide.settings.OCamlPluginConfig</implementation-class>
+            <implementation-class>org.hoggar.ide.settings.OCamlPluginConfig</implementation-class>
         </component>
     </application-components>
 
@@ -40,40 +40,40 @@
         <!-- Add your extensions here -->
 
         <applicationConfigurable groupId="language" displayName="OCaml" id="preference.OCamlPluginConfigurable"
-                                 instance="org.ocaml.ide.settings.OCamlPluginConfigurable"/>
+                                 instance="org.hoggar.ide.settings.OCamlPluginConfigurable"/>
 
-        <fileTypeFactory implementation="org.ocaml.lang.MlFileTypeFactory"/>
-        <lang.parserDefinition language="Ocaml" implementationClass="org.ocaml.lang.parser.OcamlParserDefinition"/>
+        <fileTypeFactory implementation="org.hoggar.lang.MlFileTypeFactory"/>
+        <lang.parserDefinition language="Ocaml" implementationClass="org.hoggar.lang.parser.OcamlParserDefinition"/>
 
         <lang.syntaxHighlighterFactory key="Ocaml"
-                                       implementationClass="org.ocaml.ide.highlighter.OcamlSyntaxHighlighterFactory"/>
+                                       implementationClass="org.hoggar.ide.highlighter.OcamlSyntaxHighlighterFactory"/>
         <externalAnnotator language="Ocaml"
-                           implementationClass="org.ocaml.ide.highlighter.MerlinErrorHighlightingAnnotator"/>
+                           implementationClass="org.hoggar.ide.highlighter.MerlinErrorHighlightingAnnotator"/>
 
-        <colorSettingsPage implementation="org.ocaml.ide.colorscheme.OcamlColorSettingsPage"/>
+        <colorSettingsPage implementation="org.hoggar.ide.colorscheme.OcamlColorSettingsPage"/>
         <completion.contributor language="Ocaml"
-                                implementationClass="org.ocaml.ide.completion.OcamlCompletionContributor"/>
-        <lang.commenter language="Ocaml" implementationClass="org.ocaml.ide.commenter.OcamlCommenter"/>
+                                implementationClass="org.hoggar.ide.completion.OcamlCompletionContributor"/>
+        <lang.commenter language="Ocaml" implementationClass="org.hoggar.ide.commenter.OcamlCommenter"/>
 
 
-        <fileTypeFactory implementation="org.ocaml.ide.mli.MliFileTypeFactory"/>
+        <fileTypeFactory implementation="org.hoggar.ide.mli.MliFileTypeFactory"/>
         <lang.syntaxHighlighterFactory key="Ocaml Interface"
-                                       implementationClass="org.ocaml.ide.highlighter.OcamlSyntaxHighlighterFactory"/>
+                                       implementationClass="org.hoggar.ide.highlighter.OcamlSyntaxHighlighterFactory"/>
 
         <!-- Projects -->
-        <moduleType id="OcamlModuleType" implementationClass="org.ocaml.ide.project.OcamlModuleType"/>
-        <moduleBuilder builderClass="org.ocaml.ide.project.OcamlModuleBuilder"/>
+        <moduleType id="OcamlModuleType" implementationClass="org.hoggar.ide.project.OcamlModuleType"/>
+        <moduleBuilder builderClass="org.hoggar.ide.project.OcamlModuleBuilder"/>
 
         <!-- Run configurations -->
-        <configurationType implementation="org.ocaml.ide.runconfig.OcamlRunConfigurationType"/>
-        <programRunner id="ocamlRunner" implementation="org.ocaml.ide.runconfig.OcamlRunner"/>
+        <configurationType implementation="org.hoggar.ide.runconfig.OcamlRunConfigurationType"/>
+        <programRunner id="ocamlRunner" implementation="org.hoggar.ide.runconfig.OcamlRunner"/>
 
         <lang.findUsagesProvider language="Ocaml"
-                                 implementationClass="org.ocaml.ide.usages.OcamlFindUsagesProvider"/>
+                                 implementationClass="org.hoggar.ide.usages.OcamlFindUsagesProvider"/>
     </extensions>
 
     <actions>
-        <action id="ocaml.refmt" class="org.ocaml.ide.format.OCamlFormatAction" text="Reformat OCaml code">
+        <action id="ocaml.refmt" class="org.hoggar.ide.format.OCamlFormatAction" text="Reformat OCaml code">
             <add-to-group group-id="CodeFormatGroup" anchor="after" relative-to-action="ReformatCode"/>
             <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt shift R"/>
         </action>

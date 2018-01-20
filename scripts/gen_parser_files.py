@@ -211,7 +211,7 @@ non_terminals = ['implementation',
                  'item_extension',
                  'payload']
 
-package = "org.ocaml.lang.parser.psi"
+package = "org.hoggar.lang.parser.psi"
 
 path = "../src/main/kotlin"
 
@@ -239,7 +239,7 @@ class GenParser(object):
         f = file(self.gen_path + "/%sNonTerminals.kt" % self.prefix, "w")
 
         f.write("package %s\n" % self.package)
-        f.write("import org.ocaml.lang.parser.OcamlNonTerminalElementType\n")
+        f.write("import org.hoggar.lang.parser.OcamlNonTerminalElementType\n")
 
         f.write("object %sNonTerminals {\n" % (self.prefix))
 
@@ -277,7 +277,7 @@ class NonTerminals(FileTemplate):
 
     def construct(self):
         self.init()
-        self.import_package("org.ocaml.lang.parser.OcamlNonTerminalElementType")
+        self.import_package("org.hoggar.lang.parser.OcamlNonTerminalElementType")
         self.start_class("object")
         for non_terminal in non_terminals:
             self.write_line('val %s = OcamlNonTerminalElementType("%s")\n' % (non_terminal.upper(), non_terminal))

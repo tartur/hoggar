@@ -1,17 +1,17 @@
 
 {
-    parserClass='org.ocaml.lang.parser.OcamlParser'
-    parserUtilClass="org.ocaml.lang.parser.OcamlParserUtil"
-    psiPackage='org.ocaml.lang.parser.psi'
-    psiImplPackage='org.ocaml.lang.parser.psi.impl'
+    parserClass='org.hoggar.lang.parser.OcamlParser'
+    parserUtilClass="org.hoggar.lang.parser.OcamlParserUtil"
+    psiPackage='org.hoggar.lang.parser.psi'
+    psiImplPackage='org.hoggar.lang.parser.psi.impl'
 
 
-    elementTypeHolderClass='org.ocaml.lang.parser.psi.OcamlCompositeElementTypes'
+    elementTypeHolderClass='org.hoggar.lang.parser.psi.OcamlCompositeElementTypes'
 
-    elementTypeClass='org.ocaml.lang.parser.psi.OcamlCompositeElementType'
-    tokenTypeClass='org.ocaml.lang.lexer.OcamlTokenElementType'
+    elementTypeClass='org.hoggar.lang.parser.psi.OcamlCompositeElementType'
+    tokenTypeClass='org.hoggar.lang.lexer.OcamlTokenElementType'
 
-    parserImports='static org.ocaml.lang.lexer.OcamlTypes.*'
+    parserImports='static org.hoggar.lang.lexer.OcamlTypes.*'
 
     tokens = [
         AND = "and"
@@ -810,7 +810,7 @@ lident_list ::=
 
 val_decl ::=
     val_ident {
-    mixin = "org.ocaml.lang.parser.psi.ValDeclMixin"
+    mixin = "org.hoggar.lang.parser.psi.ValDeclMixin"
     }
 
 let_binding_body ::=
@@ -1320,7 +1320,7 @@ constr_ident ::=
 val_longident ::=
     val_ident
   | mod_longident DOT val_ident {
-    mixin = "org.ocaml.lang.parser.psi.ValueIdentifierMixin"
+    mixin = "org.hoggar.lang.parser.psi.ValueIdentifierMixin"
 }
 
 constr_longident ::=
