@@ -11,7 +11,7 @@ import com.intellij.psi.PsiDocumentManager
 class OCamlFormatAction : AnAction() {
     override fun actionPerformed(e: AnActionEvent?) {
         val formatter = FormatterUtil.getConfiguredFormatter()
-        if (e != null && FormatterUtil.isFormattingEnabled()) {
+        if (formatter != null && e != null && FormatterUtil.isFormattingEnabled()) {
             val psiFile = e.getData(CommonDataKeys.PSI_FILE)
             val project = e.project
             if (project != null && psiFile != null && psiFile.fileType is MlFileType) {

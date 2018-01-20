@@ -10,7 +10,7 @@ class OCamlReformatOnSave : FileDocumentManagerAdapter() {
         val formatter = FormatterUtil.getConfiguredFormatter()
         val fileDocumentManager = FileDocumentManager.getInstance()
         val file = fileDocumentManager.getFile(document)
-        if (FormatterUtil.isFormattingEnabled() && file != null && file.fileType is MlFileType) {
+        if (formatter != null && FormatterUtil.isFormattingEnabled() && file != null && file.fileType is MlFileType) {
             formatter.updateDocumentFormatting(document)
         }
     }

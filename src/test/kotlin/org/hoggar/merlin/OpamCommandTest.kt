@@ -8,7 +8,7 @@ class OpamCommandTest {
 
     @Test
     fun extractOpamEnvironmentVariables() {
-        val process = OpamCommand.OCaml.start("-version")
+        val process = OpamCommand.ocaml().start("-version")
         process.waitFor()
 
         val result = String(ByteStreams.toByteArray(process.inputStream))

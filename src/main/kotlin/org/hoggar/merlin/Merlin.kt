@@ -19,7 +19,7 @@ class Merlin(private val objectMapper: ObjectMapper, private val merlinProcess: 
     companion object {
         private val LOG = Logger.getInstance(Merlin::class.java)
 
-        val opamCommand = OpamCommand()
+        private val opamCommand by lazy { OpamCommand() }
 
         private fun merlinInstance(): Merlin {
             val p = merlinProcess()
@@ -138,6 +138,7 @@ data class CompletionEntry(val name: String, val kind: String, val desc: String,
 @JsonFormat(shape = JsonFormat.Shape.ARRAY)
 @JsonPropertyOrder("contextType", "applicationContext")
 data class CompletionContext(val contextType: String, val applicationContext: ApplicationContext)
+
 data class ApplicationContext(val argument_type: String, val labels: List<ApplicationLabels>)
 data class ApplicationLabels(val name: String, val type: String)
 

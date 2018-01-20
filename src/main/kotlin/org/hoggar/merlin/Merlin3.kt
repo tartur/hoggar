@@ -18,6 +18,8 @@ class Merlin3(private val objectMapper: ObjectMapper) {
         }
     }
 
+    private val ocamlMerlin by lazy { OpamCommand.ocamlMerlin() }
+
     fun document(text: String, position: Position): Doc {
         val output = runCommand("document", text, null, listOf("-position", "${position.line}:${position.col}"))
         val response = extractResponse(objectMapper.readTree(output))
@@ -44,7 +46,7 @@ class Merlin3(private val objectMapper: ObjectMapper) {
         }
         args.addAll(command)
 
-        val merlinProcess = OpamCommand.OCamlMerlin.start(*(args.toTypedArray()))
+        val merlinProcess = ocamlMerlin.start(*(args.toTypedArray()))
         val writer = OutputStreamWriter(merlinProcess.outputStream)
         val reader = BufferedReader(InputStreamReader(merlinProcess.inputStream))
 

@@ -5,8 +5,8 @@ import com.google.common.io.ByteStreams
 
 class OpamCommand(private val executable: String = "<NONE>") {
     companion object {
-        val OCaml = OpamCommand("ocaml")
-        val OCamlMerlin = OpamCommand("ocamlmerlin")
+        fun ocaml() = OpamCommand("ocaml")
+        fun ocamlMerlin() = OpamCommand("ocamlmerlin")
     }
 
     private var binFolder: String = binFolder()
